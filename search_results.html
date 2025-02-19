@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <h2>Search Results</h2>
+
+    <!-- Iframe for Google Search Results -->
+    <iframe id="searchFrame" src="about:blank" width="100%" height="600px"></iframe>
+
+    <script>
+        window.onload = function () {
+            const params = new URLSearchParams(window.location.search);
+            const query = params.get("q");
+            if (query) {
+                document.getElementById("searchFrame").src =
+                    `https://cse.google.com/cse?cx=440a21345affa4c4f&q=${encodeURIComponent(query)}`;
+            }
+        };
+    </script>
+
+</body>
+</html>
