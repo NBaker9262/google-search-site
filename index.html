@@ -25,26 +25,31 @@
 <body>
 
     <h2>Search Google</h2>
+
+    <!-- Google CSE Script (Make Sure This is Added Only Once) -->
     <script async src="https://cse.google.com/cse.js?cx=440a21345affa4c4f"></script>
 
     <div class="container">
-        <!-- Google Search Results -->
+        <!-- Google Search Box & Results -->
         <div class="search-results">
-            <div class="gcse-search"></div>
-            <div class="gcse-searchresults-only"></div>
+            <div class="gcse-search"></div>  <!-- Search Box -->
+            <div class="gcse-searchresults-only"></div>  <!-- Search Results -->
         </div>
 
-        <!-- Preview Frame -->
+        <!-- Iframe to Load Links -->
         <iframe id="resultFrame" src="about:blank"></iframe>
     </div>
 
     <script>
-        document.addEventListener("click", function (event) {
-            let target = event.target.closest("a");
-            if (target && target.href) {
-                event.preventDefault(); // Stop normal navigation
-                document.getElementById("resultFrame").src = target.href; // Load in iframe
-            }
+        // Wait for the search results to load
+        document.addEventListener("DOMContentLoaded", function () {
+            document.body.addEventListener("click", function (event) {
+                let target = event.target.closest("a");  // Detect link clicks
+                if (target && target.href) {
+                    event.preventDefault();  // Stop normal navigation
+                    document.getElementById("resultFrame").src = target.href;  // Open in iframe
+                }
+            });
         });
     </script>
 
