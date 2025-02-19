@@ -4,14 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Search</title>
+    <style>
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+        .search-results {
+            width: 40%;
+            height: 600px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+        }
+        #resultFrame {
+            width: 60%;
+            height: 600px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 <body>
 
     <h2>Search Google</h2>
+    <script async src="https://cse.google.com/cse.js?cx=YOUR_CSE_ID"></script>
 
-    <!-- Google Search Engine Embed -->
-    <script async src="https://cse.google.com/cse.js?cx=440a21345affa4c4f"></script>
-    <div class="gcse-search" data-resultsUrl="search_results.html"></div>
+    <div class="container">
+        <!-- Google Search Results -->
+        <div class="search-results">
+            <div class="gcse-search"></div>
+            <div class="gcse-searchresults-only"></div>
+        </div>
+
+        <!-- Preview Frame -->
+        <iframe id="resultFrame" src="about:blank"></iframe>
+    </div>
+
+    <script>
+        document.addEventListener("click", function (event) {
+            let target = event.target.closest("a");
+            if (target && target.href) {
+                event.preventDefault(); // Stop normal navigation
+                document.getElementById("resultFrame").src = target.href; // Load in iframe
+            }
+        });
+    </script>
 
 </body>
 </html>
